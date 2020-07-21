@@ -20,7 +20,6 @@ public class LeitorOpcoesCLI {
         boolean modoVerboso = false;
 
         try {
-            System.out.println(formato);
             if ("pdf".equals(formato)) {
                 Options options = new Options();
 
