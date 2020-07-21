@@ -1,0 +1,33 @@
+package cotuba.cli;
+
+import cotuba.application.Cotuba;
+import cotuba.cli.LeitorOpcoesCLI;
+
+import java.nio.file.*;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+
+		LeitorOpcoesCLI opcoesCLI = new LeitorOpcoesCLI(args);
+		Path diretorioDosMD = Paths.get(opcoesCLI.getFormato());
+		String formato = opcoesCLI.getFormato();
+		Path arquivoDeSaida = opcoesCLI.getArquivoDeSaida();
+		boolean modoVerboso = opcoesCLI.isModoVerboso();
+
+		try {
+			Cotuba cotuba = new Cotuba();
+			cotuba.executa(formato, diretorioDosMD, arquivoDeSaida);
+
+			System.out.println("Arquivo gerado com sucesso: " + arquivoDeSaida);
+
+		} catch (Exception ex) {
+			System.err.println(ex.getMessage());
+			if (modoVerboso) {
+				ex.printStackTrace();
+			}
+			System.exit(1);
+		}
+	}
+
+}
